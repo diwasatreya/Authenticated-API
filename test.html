@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API - Testing</title>
+</head>
+
+<body>
+    <h2>Testing the API's</h2>
+</body>
+
+<script>
+
+    const api = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/api/users', {
+                method: 'POST',
+                headers: { 'Authorization': 'Bearer 468679ed9dfd24e7c9328d16272f9786e92c4dbc8aea74ec9c7058299219fec9' }
+            });
+
+            const data = await response.json();
+
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+            return;
+        }
+    }
+
+    api()
+
+</script>
+
+</html>

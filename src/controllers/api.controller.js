@@ -17,9 +17,9 @@ const showAllUsers = async (req, res) => {
     // console.log(req.originalUrl);
 
     const apiKey = req.headers.authorization.replace('Bearer ', '');
-    await updateTracker(apiKey, req.originalUrl, "post");
+    updateTracker(apiKey, req.originalUrl, "post");
 
-    return res.status(200).json([{ success: true }])
+    return res.status(200).json({ success: true })
 }
 
 const showUser = async (req, res) => {
@@ -27,7 +27,7 @@ const showUser = async (req, res) => {
 
     const apiKey = req.headers.authorization.replace('Bearer ', '');
     const url = req.originalUrl.replace(value, '{id}');
-    await updateTracker(apiKey, url, "get");
+    updateTracker(apiKey, url, "get");
 
     return res.status(200).json({ value, success: true })
 }

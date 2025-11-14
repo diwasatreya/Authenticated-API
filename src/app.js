@@ -6,6 +6,8 @@ import userRoute from './routes/user.route.js';
 import authRoute from './routes/auth.route.js';
 import apiRoute from './routes/api.route.js';
 
+import cors from 'cors';
+
 const app = express();
 
 app.set("view engine", "ejs");
@@ -17,6 +19,9 @@ app.use(cookieParser());
 
 app.use('/auth', authRoute);
 app.use('/', userRoute);
+app.use("/api", cors({
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+}));
 app.use('/api', apiRoute)
 
 
