@@ -109,9 +109,9 @@
     </div>
 
     <div class="bg-gray-800/30 backdrop-blur-xl border border-gray-700/50 rounded-xl shadow-2xl p-6">
-        <h2 class="text-xl font-semibold text-white mb-4">Route Usage Tracking (Last 7 Days)</h2>
+        <h2 class="text-xl font-semibold text-white mb-4">Route Usage Tracking</h2>
 
-        <% if(userAPI) { %>
+        <% if(userAPI && userAPI.track.length !==0) { %>
 
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-700/50">
@@ -127,25 +127,29 @@
                                 Total Calls
                             </th>
                             <th class="px-4 py-3 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">
-                                Success Rate
+                                Usage Rate
                             </th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-700/50 text-white">
-                        <tr class="hover:bg-gray-700/20 transition duration-150">
-                            <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-indigo-300">/api/v1/users
-                            </td>
-                            <td class="px-4 py-4 whitespace-nowrap text-sm text-yellow-400">GET</td>
-                            <td class="px-4 py-4 whitespace-nowrap text-sm text-right">4,512</td>
-                            <td class="px-4 py-4 whitespace-nowrap text-sm text-right text-green-400">99.8%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-700/20 transition duration-150">
-                            <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-indigo-300">
-                                /api/v1/data/process</td>
-                            <td class="px-4 py-4 whitespace-nowrap text-sm text-green-400">POST</td>
-                            <td class="px-4 py-4 whitespace-nowrap text-sm text-right">1,876</td>
-                            <td class="px-4 py-4 whitespace-nowrap text-sm text-right text-green-400">95.5%</td>
-                        </tr>
+                        <% userAPI.track.forEach((tr)=> { %>
+                            <tr class="hover:bg-gray-700/20 transition duration-150">
+                                <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-indigo-300">
+                                    <%= tr.url %>
+                                </td>
+                                <td
+                                    class="px-4 py-4 whitespace-nowrap text-sm <%- (tr.method.toUpperCase() == 'POST') ? 'text-green-400' : 'text-yellow-400' %>">
+                                    <%= tr.method.toUpperCase() %>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-right">
+                                    <%= tr.count %>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-right text-green-400">
+                                    <%= ((tr.count/userAPI.totalCounts)*100).toFixed(2) %>%
+                                </td>
+                            </tr>
+
+                            <% }) %>
                     </tbody>
                 </table>
             </div>

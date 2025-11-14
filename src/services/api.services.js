@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
 import userAPI from '../models/userAPI.model.js';
+import { count } from 'node:console';
 
 const createAPIKey = async (user) => {
     try {
@@ -29,9 +30,54 @@ const getUserAPI = async (userID) => {
         console.error(error);
         return;
     }
+};
+
+const getUserAPIByKey = async (key) => {
+    try {
+        const userApi = await userAPI.findOne({ key: key, active: true });
+        return userApi;
+    } catch (error) {
+        console.error(error);
+        return;
+    }
+}
+
+const verifyAPIKey = async (key) => {
+    try {
+        const userApi = await userAPI.findOne({ key: key, active: true });
+
+        return (userApi) ? true : false;
+
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+};
+
+const updateTracker = async (key, url, method) => {
+    try {
+        const api = await getUserAPIByKey(key);
+        if (!api) return;
+        const path = api.track.find(info => info.url == url);
+        if (path) {
+            path.count = path.count + 1;
+            api.markModified("track");
+        } else {
+            api.track.push({ url: url, method, count: 1 })
+        }
+        api.totalCounts++;
+        await api.save();
+        return api;
+    } catch (error) {
+        console.error(error);
+        return;
+    }
 }
 
 export {
     createAPIKey,
-    getUserAPI
+    getUserAPI,
+    verifyAPIKey,
+    updateTracker,
+    getUserAPIByKey
 }
