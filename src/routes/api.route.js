@@ -6,7 +6,8 @@ import { checkAPI } from "../middlewares/api.middleware.js";
 const router = Router();
 
 router.route('/generate').post(checkAuth, generateAPIKey);
-router.route('/users').post(checkAPI, showAllUsers);
-router.route('/users/:id').get(checkAPI, showUser);
+router.use(checkAPI);
+router.route('/users').post(showAllUsers);
+router.route('/users/:id').get(showUser);
 
 export default router;

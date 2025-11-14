@@ -19,7 +19,7 @@ const showAllUsers = async (req, res) => {
     const apiKey = req.headers.authorization.replace('Bearer ', '');
     await updateTracker(apiKey, req.originalUrl, "post");
 
-    return res.status(200).json([{ _id: 2 }, { _id: 3 }])
+    return res.status(200).json([{ success: true }])
 }
 
 const showUser = async (req, res) => {
@@ -29,7 +29,7 @@ const showUser = async (req, res) => {
     const url = req.originalUrl.replace(value, '{id}');
     await updateTracker(apiKey, url, "get");
 
-    return res.status(200).json({ _id: value })
+    return res.status(200).json({ value, success: true })
 }
 
 export {
