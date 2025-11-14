@@ -40,9 +40,14 @@ const signupNewUser = async (req, res) => {
 
         const newUser = await createNewUser(username, email, password);
 
-        console.log(newUser);
+        const session = await createNewSession(req, res, newUser);
 
-        res.redirect('/auth/login');
+        if (!session) {
+            console.log(('Failed to create session'));
+            return res.redirect('/auth/login');
+        }
+
+        res.redirect('/');
 
     } catch (error) {
         console.error(error);
