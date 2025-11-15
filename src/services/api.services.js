@@ -7,7 +7,7 @@ const createAPIKey = async (user) => {
         if (!user) return;
         await userAPI.updateMany({ userID: user.userID }, { active: false });
 
-        const key = crypto.randomBytes(32).toString('hex');
+        const key = `sh-${crypto.randomBytes(32).toString('hex').slice(0, 36)}`;
 
         const apiKey = await new userAPI({
             userID: user.userID,
@@ -58,21 +58,42 @@ const updateTracker = async (key, url, method) => {
     try {
         const api = await getUserAPIByKey(key);
         if (!api) return;
-        const path = api.track.find(info => info.url == url);
-        if (path) {
-            path.count = path.count + 1;
-            api.markModified("track");
-        } else {
-            api.track.push({ url: url, method, count: 1 })
+
+        const existingPath = api.track.find(t => t.url === url);
+
+        if (existingPath) {
+            return await userAPI.findOneAndUpdate(
+                {
+                    _id: api._id,
+                    "track.url": url
+                },
+                {
+                    $inc: {
+                        "track.$.count": 1,
+                        totalCounts: 1
+                    }
+                },
+                { new: true }
+            );
         }
-        api.totalCounts++;
-        await api.save();
-        return api;
+
+        return await userAPI.findByIdAndUpdate(
+            api._id,
+            {
+                $push: {
+                    track: { url, method, count: 1 }
+                },
+                $inc: { totalCounts: 1 }
+            },
+            { new: true }
+        );
+
     } catch (error) {
         console.error(error);
-        return;
+        return null;
     }
-}
+};
+
 
 export {
     createAPIKey,

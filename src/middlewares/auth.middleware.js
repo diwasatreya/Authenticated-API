@@ -12,8 +12,7 @@ const checkAuth = async (req, res, next) => {
         }
 
         if (!accessToken) {
-            const { accessTokenInfo } = await generateNewTokens(req, res, next, refreshToken);
-            req.user = accessTokenInfo;
+            await generateNewTokens(req, res, next, refreshToken);
             return next();
         }
 

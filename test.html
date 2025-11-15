@@ -13,11 +13,11 @@
 
 <script>
 
-    const api = async () => {
+    const getApi = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/users', {
-                method: 'POST',
-                headers: { 'Authorization': 'Bearer 468679ed9dfd24e7c9328d16272f9786e92c4dbc8aea74ec9c7058299219fec9' }
+            const response = await fetch('http://localhost:3000/api/users/Diwas', {
+                method: 'GET',
+                headers: { 'Authorization': 'Bearer sh-94f28b6cc4aca6abb8800a2de9e05993fe10' }
             });
 
             const data = await response.json();
@@ -29,8 +29,25 @@
         }
     }
 
-    api()
+    const postApi = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/api/users', {
+                method: 'POST',
+                headers: { 'Authorization': 'Bearer sh-94f28b6cc4aca6abb8800a2de9e05993fe10', 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId: "Diwas" })
+            });
 
+            const data = await response.json();
+
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+            return;
+        }
+    }
+
+    getApi();
+    postApi();
 </script>
 
 </html>

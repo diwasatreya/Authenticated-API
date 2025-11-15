@@ -71,9 +71,7 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-400 mb-1">Your Current API Key</label>
                     <div class="flex items-center space-x-2 bg-gray-700/50 rounded-lg p-3">
-                        <code id="apiKey" class="flex-grow text-white truncate">
-                            <%= userAPI.key %>
-                        </code>
+                        <code id="apiKey" class="flex-grow text-white truncate"><%= userAPI.key.trim() %></code>
                         <button class="text-indigo-400 hover:text-indigo-300 text-sm font-medium">Copy</button>
                     </div>
                 </div>

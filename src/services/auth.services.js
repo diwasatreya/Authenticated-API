@@ -136,6 +136,8 @@ const generateNewTokens = async (req, res, next, refreshToken) => {
         res.cookie('accessToken', newAccessToken, { maxAge: convertToMs('5m') });
         res.cookie('refreshToken', newRefreshToken, { maxAge: convertToMs('20d') });
 
+        req.user = accessTokenInfo || null;
+
         return {
             newAccessToken,
             newRefreshToken,
