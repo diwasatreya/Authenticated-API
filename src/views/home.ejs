@@ -72,7 +72,8 @@
                     <label class="block text-sm font-medium text-gray-400 mb-1">Your Current API Key</label>
                     <div class="flex items-center space-x-2 bg-gray-700/50 rounded-lg p-3">
                         <code id="apiKey" class="flex-grow text-white truncate"><%= userAPI.key.trim() %></code>
-                        <button class="text-indigo-400 hover:text-indigo-300 text-sm font-medium">Copy</button>
+                        <button class="text-indigo-400 hover:text-indigo-300 text-sm font-medium"
+                            id="copybtn">Copy</button>
                     </div>
                 </div>
 
@@ -196,6 +197,19 @@
 
     </div>
     </div>
+
+    <script>
+        const copybtn = document.getElementById('copybtn');
+        const apikey = document.getElementById('apiKey').textContent;
+
+        copybtn.addEventListener('click', async () => {
+            await navigator.clipboard.writeText(apikey);
+            copybtn.innerText = "Copied";
+            setTimeout(() => {
+                copybtn.innerText = "Copy";
+            }, 1000)
+        });
+    </script>
 
 </body>
 
