@@ -26,11 +26,21 @@ A simple and secure API system that requires an API token to access protected ap
 
 ## PREVIEW
 
-Login Page
+Login Page:
+
 ![Login Page Preview](./src/public/image/auth_login.png)
 
-Signup Page
+Signup Page:
+
 ![Signup Page Preview](./src/public/image/auth_signup.png)
 
-Home Page
+Home Page:
+
 ![Home Page Preview](./src/public/image/dashboard.png)
+
+## License
+
+This project is licensed under the MIT. See the [LICENSE](LICENSE) file for details.
+
+## Support
+Free free to ⭐ fork/start or to contribute on the repository and make sure to follow [Diwas Atreya](https://github.com/diwasatreya)
