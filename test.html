@@ -13,11 +13,13 @@
 
 <script>
 
+    const API_KEY = 'sh-5dd7acc52a7a37ee797e756a51a9e67fcc14';
+
     const getApi = async () => {
         try {
             const response = await fetch('http://localhost:3000/api/users/Diwas', {
                 method: 'GET',
-                headers: { 'Authorization': 'Bearer sh-94f28b6cc4aca6abb8800a2de9e05993fe10' }
+                headers: { 'Authorization': `Bearer ${API_KEY}` }
             });
 
             const data = await response.json();
@@ -33,7 +35,7 @@
         try {
             const response = await fetch('http://localhost:3000/api/users', {
                 method: 'POST',
-                headers: { 'Authorization': 'Bearer sh-94f28b6cc4aca6abb8800a2de9e05993fe10', 'Content-Type': 'application/json' },
+                headers: { 'Authorization': `Bearer ${API_KEY}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId: "Diwas" })
             });
 
@@ -46,7 +48,7 @@
         }
     }
 
-    getApi();
+    // getApi();
     postApi();
 </script>
 

@@ -1,14 +1,14 @@
 {
-  "name": "rest-api",
+  "name": "authenticated-api",
   "version": "1.0.0",
-  "description": "Trying to make the rest api using MongoDB, Express &amp; NodeJS",
-  "homepage": "https://github.com/diwasatreya/REST-API#readme",
+  "description": "A simple and secure API system that requires an API token to access protected api routes.",
+  "homepage": "https://github.com/diwasatreya/Authenticated-API#readme",
   "bugs": {
-    "url": "https://github.com/diwasatreya/REST-API/issues"
+    "url": "https://github.com/diwasatreya/Authenticated-API/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/diwasatreya/REST-API.git"
+    "url": "git+https://github.com/diwasatreya/Authenticated-API.git"
   },
   "license": "MIT",
   "author": "",
